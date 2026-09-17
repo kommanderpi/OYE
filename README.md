@@ -96,17 +96,19 @@ Codex automatically creates `config.toml` inside the hidden `.codex` folder in y
 ### macOS
 
 1. Open **Finder**.
-2. Select **Go → Go to Folder**, or press **Command+Shift+G**.
-3. Enter `~/.codex` and press **Enter**.
-4. Find `config.toml`.
-5. Right-click the file and select **Open With → Visual Studio Code**.
+2. Press **Command+Shift+.** to show hidden files and folders. Press the same shortcut again to hide them.
+3. Select **Go → Go to Folder**, or press **Command+Shift+G**.
+4. Enter `~/.codex` and press **Enter**.
+5. Find `config.toml`.
+6. Right-click the file and select **Open With → Visual Studio Code**.
 
 ### Windows
 
 1. Open **File Explorer**.
-2. Click the address bar, enter `%USERPROFILE%\.codex`, and press **Enter**.
-3. Find `config.toml`.
-4. Right-click the file and select **Open with → Visual Studio Code**. You may need to select **Show more options** first.
+2. Select **View → Show → Hidden items**. On older versions of Windows, open the **View** tab and select **Hidden items**.
+3. Click the address bar, enter `%USERPROFILE%\.codex`, and press **Enter**.
+4. Find `config.toml`.
+5. Right-click the file and select **Open with → Visual Studio Code**. You may need to select **Show more options** first.
 
 ---
 

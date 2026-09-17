@@ -89,17 +89,17 @@ and the agent configuration files tell Codex **which agents exist and which mode
 
 ---
 
-## A1. Create the Codex folder
+## A1. Find the Codex folder
 
-In your **user/home folder**, create:
+When Codex is installed, it automatically creates this folder in your **user/home folder**:
 
 ```text
-.codex/
+~/.codex/
 ```
 
-This folder does **not** go inside `Projects`. On macOS, its full path looks like `/Users/your-name/.codex`. On Windows, it is inside `C:\Users\your-name`. The shortcut `~` means your user/home folder, so this guide writes the location as `~/.codex`.
+You do **not** need to create `.codex` yourself. This folder does **not** go inside `Projects`. On macOS, its full path looks like `/Users/your-name/.codex`. On Windows, it is inside `C:\Users\your-name`. The shortcut `~` means your user/home folder, so this guide writes the location as `~/.codex`.
 
-Then create another folder inside it:
+Inside the existing `.codex` folder, create an `agents` folder if it is not already there:
 
 ```text
 ~/.codex/agents/
@@ -126,9 +126,9 @@ Your home folder/
 
 ---
 
-## A2. Create the Codex user configuration
+## A2. Open the Codex user configuration
 
-Create:
+Open this file, or create it inside the existing `.codex` folder if it is not there yet:
 
 ```text
 ~/.codex/config.toml
@@ -137,6 +137,8 @@ Create:
 ### How to find `config.toml`
 
 The `.codex` folder starts with a dot, which means your computer may treat it as a **hidden folder**. It is in your user/home folder, alongside folders such as `Documents`, `Downloads`, and `Projects`. It is **not** inside `Projects` or one of the course project folders.
+
+From the Codex IDE extension, select the **gear icon** in the top-right corner, then select **Codex Settings → Open config.toml**.
 
 The easiest way to open the file in VS Code is from a terminal:
 
@@ -162,7 +164,7 @@ You should see `.codex` in the output. On macOS, you can also open Finder, press
 
 On Windows, enter `%USERPROFILE%\.codex` in File Explorer's address bar. If needed, select **View → Show → Hidden items**.
 
-If you cannot find the file, it probably has not been created yet. Create a folder named `.codex` directly inside your user/home folder, then create `config.toml` inside it. Be careful that the file is not accidentally saved as `config.toml.txt`.
+If `.codex` exists but `config.toml` does not, create `config.toml` inside the existing `.codex` folder. Be careful that the file is not accidentally saved as `config.toml.txt`. If the `.codex` folder itself is missing, confirm that Codex is installed and has been opened; do not create the folder inside `Projects`.
 
 Add:
 

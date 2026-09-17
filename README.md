@@ -41,7 +41,7 @@ Open the entire `Projects` folder using **Open Folder**.
 
 Your `Projects` directory should now be the root of your VS Code workspace.
 
-Keep VS Code open while you complete the coding-agent setup below. If you use Codex, you will add the existing `.codex` folder to this workspace before saving it. If you use Claude Code, you can save the workspace now.
+Save the VS Code workspace so that you can easily return to this setup.
 
 ---
 
@@ -89,106 +89,42 @@ and the agent configuration files tell Codex **which agents exist and which mode
 
 ---
 
-## A1. Find the Codex folder
+## A1. Find and open `config.toml`
 
-When Codex is installed, it automatically creates this folder in your **user/home folder**:
+Codex automatically creates `config.toml` inside the hidden `.codex` folder in your user/home folder. Do not create another copy inside `Projects`.
 
-```text
-~/.codex/
-```
+### macOS
 
-You do **not** need to create `.codex` yourself. This folder does **not** go inside `Projects`. On macOS, its full path looks like `/Users/your-name/.codex`. On Windows, it is inside `C:\Users\your-name`. The shortcut `~` means your user/home folder, so this guide writes the location as `~/.codex`.
+1. Open **Finder**.
+2. Select **Go → Go to Folder**, or press **Command+Shift+G**.
+3. Enter `~/.codex` and press **Enter**.
+4. Find `config.toml`.
+5. Right-click the file and select **Open With → Visual Studio Code**.
 
-### Add `.codex` to your VS Code workspace
+### Windows
 
-Because `.codex` is outside `Projects`, it will not appear in VS Code's Explorer when only `Projects` is open. Add it as a second workspace folder:
-
-1. In VS Code, select **File → Add Folder to Workspace**. Do not use **Open Folder**, because that would replace `Projects`.
-2. On macOS, press **Command+Shift+G**, enter `~/.codex`, and press **Enter**. On Windows, enter `%USERPROFILE%\.codex` in the folder dialog's address bar.
-3. Select the `.codex` folder and add it.
-4. Confirm that both `Projects` and `.codex` now appear as top-level folders in VS Code's Explorer.
-5. Select **File → Save Workspace As** and save the workspace. If you saved it earlier, save it again after adding `.codex`.
-
-Inside the existing `.codex` folder, create an `agents` folder if it is not already there:
-
-```text
-~/.codex/agents/
-```
-
-Your structure should begin to look like this:
-
-```text
-Your home folder/
-├── .codex/
-│   ├── config.toml
-│   └── agents/
-│       ├── explorer.toml
-│       ├── builder.toml
-│       ├── reviewer.toml
-│       └── documenter.toml
-│
-└── Projects/
-    ├── AGENTS.md
-    ├── TM_PE/
-    ├── TM_OD/
-    └── Digital Twin/
-```
+1. Open **File Explorer**.
+2. Click the address bar, enter `%USERPROFILE%\.codex`, and press **Enter**.
+3. Find `config.toml`.
+4. Right-click the file and select **Open with → Visual Studio Code**. You may need to select **Show more options** first.
 
 ---
 
-## A2. Open the Codex user configuration
+## A2. Enable agents
 
-Codex automatically creates this file inside `.codex`:
-
-```text
-~/.codex/config.toml
-```
-
-Do **not** create a second `config.toml` inside `Projects`.
-
-### How to find `config.toml`
-
-The `.codex` folder starts with a dot, which means your computer may treat it as a **hidden folder**. It is in your user/home folder, alongside folders such as `Documents`, `Downloads`, and `Projects`. It is **not** inside `Projects` or one of the course project folders.
-
-After adding `.codex` to the VS Code workspace in step A1, expand `.codex` in the Explorer and select `config.toml`.
-
-You can also open it from the Codex IDE extension: select the **gear icon** in the top-right corner, then select **Codex Settings → Open config.toml**.
-
-Alternatively, open the file from a terminal:
-
-```bash
-code ~/.codex/config.toml
-```
-
-On Windows PowerShell, use:
-
-```powershell
-code "$HOME\.codex\config.toml"
-```
-
-To confirm the folder and file exist from a macOS or Linux terminal, run:
-
-```bash
-ls -la ~/.codex
-```
-
-You should see `config.toml` in the output. On macOS, you can also open Finder, press **Command+Shift+G**, type `~/.codex`, and press **Enter**. Press **Command+Shift+.** if you want Finder to show other hidden files.
-
-On Windows, enter `%USERPROFILE%\.codex` in File Explorer's address bar. If needed, select **View → Show → Hidden items**.
-
-If you cannot see `config.toml` in VS Code, first confirm that you added the actual `.codex` folder to the workspace. Do not create another copy in `Projects`.
-
-Add:
+In `config.toml`, find the existing `[agents]` section and make sure it contains:
 
 ```toml
-# Default model for the main Codex agent
-model = "gpt-5.6-sol"
-model_reasoning_effort = "high"
-
 [agents]
 enabled = true
 max_concurrent_threads_per_session = 4
+```
 
+If `[agents]` already exists, edit that section. Do not add a second `[agents]` section.
+
+Below it, add the configuration for the four agent roles:
+
+```toml
 [agents.explorer]
 description = "Investigates the project, code, dependencies, and possible approaches before changes are made."
 config_file = "./agents/explorer.toml"
@@ -213,6 +149,12 @@ The paths in `config_file` are **relative to this `config.toml` file**. Codex ex
 # A3. Configure each Codex agent
 
 Each agent gets a different model depending on the kind of work it is doing.
+
+Inside `.codex`, create an `agents` folder if it does not already exist:
+
+```text
+~/.codex/agents/
+```
 
 ## Explorer
 
@@ -612,8 +554,6 @@ Your home folder/
     ├── TM_OD/
     └── Digital Twin/
 ```
-
-In the saved VS Code workspace, `.codex` and `Projects` should appear as two separate top-level folders.
 
 ## If you use Claude Code
 

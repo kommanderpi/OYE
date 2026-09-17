@@ -82,7 +82,7 @@ AGENTS.md
 tells Codex **how we want it to work**.
 
 ```text
-.codex/config.toml
+~/.codex/config.toml
 ```
 
 and the agent configuration files tell Codex **which agents exist and which models they should use**.
@@ -91,22 +91,24 @@ and the agent configuration files tell Codex **which agents exist and which mode
 
 ## A1. Create the Codex folder
 
-Inside `Projects`, create:
+In your **user/home folder**, create:
 
 ```text
 .codex/
 ```
 
+This folder does **not** go inside `Projects`. On macOS, its full path looks like `/Users/your-name/.codex`. On Windows, it is inside `C:\Users\your-name`. The shortcut `~` means your user/home folder, so this guide writes the location as `~/.codex`.
+
 Then create another folder inside it:
 
 ```text
-.codex/agents/
+~/.codex/agents/
 ```
 
 Your structure should begin to look like this:
 
 ```text
-Projects/
+Your home folder/
 ├── .codex/
 │   ├── config.toml
 │   └── agents/
@@ -115,51 +117,52 @@ Projects/
 │       ├── reviewer.toml
 │       └── documenter.toml
 │
-├── AGENTS.md
-├── TM_PE/
-├── TM_OD/
-└── Digital Twin/
+└── Projects/
+    ├── AGENTS.md
+    ├── TM_PE/
+    ├── TM_OD/
+    └── Digital Twin/
 ```
 
 ---
 
-## A2. Create the Codex project configuration
+## A2. Create the Codex user configuration
 
 Create:
 
 ```text
-Projects/.codex/config.toml
+~/.codex/config.toml
 ```
 
 ### How to find `config.toml`
 
-The `.codex` folder starts with a dot, which means your computer may treat it as a **hidden folder**. The file is inside the `Projects` folder you opened in VS Code—not inside one of the three course project folders.
+The `.codex` folder starts with a dot, which means your computer may treat it as a **hidden folder**. It is in your user/home folder, alongside folders such as `Documents`, `Downloads`, and `Projects`. It is **not** inside `Projects` or one of the course project folders.
 
-The easiest way to open it in VS Code is:
-
-1. Open the entire `Projects` folder in VS Code.
-2. Press **Command+P** on macOS or **Ctrl+P** on Windows/Linux.
-3. Type `.codex/config.toml`.
-4. Select the file from the results and press **Enter**.
-
-You can also find it in VS Code's Explorer by expanding `.codex` and selecting `config.toml`. VS Code normally displays folders whose names begin with a dot. If `.codex` is missing, make sure you opened the main `Projects` folder rather than `TM_PE`, `TM_OD`, or `Digital Twin`.
-
-To check from a terminal, first go to your `Projects` folder and list hidden files:
+The easiest way to open the file in VS Code is from a terminal:
 
 ```bash
-cd ~/Projects
-ls -la
+code ~/.codex/config.toml
 ```
 
-You should see `.codex` in the output. Open the file in VS Code with:
+On Windows PowerShell, use:
+
+```powershell
+code "$HOME\.codex\config.toml"
+```
+
+If the `code` command is unavailable, open VS Code, select **File → Open File**, and navigate to the file manually.
+
+To check for the folder from a macOS or Linux terminal, list the hidden files in your home folder:
 
 ```bash
-code .codex/config.toml
+ls -la ~
 ```
 
-If the `code` command is unavailable, use VS Code's **Command+P** method above. In macOS Finder, press **Command+Shift+.** to show hidden files. In Windows File Explorer, select **View → Show → Hidden items**.
+You should see `.codex` in the output. On macOS, you can also open Finder, press **Command+Shift+G**, type `~/.codex`, and press **Enter**. Press **Command+Shift+.** if you want Finder to show other hidden files.
 
-If you cannot find the file at all, it probably has not been created yet. Create a folder named `.codex` directly inside `Projects`, then create a file named `config.toml` inside that folder. Be careful that the file is not accidentally saved as `config.toml.txt`.
+On Windows, enter `%USERPROFILE%\.codex` in File Explorer's address bar. If needed, select **View → Show → Hidden items**.
+
+If you cannot find the file, it probably has not been created yet. Create a folder named `.codex` directly inside your user/home folder, then create `config.toml` inside it. Be careful that the file is not accidentally saved as `config.toml.txt`.
 
 Add:
 
@@ -202,7 +205,7 @@ Each agent gets a different model depending on the kind of work it is doing.
 Create:
 
 ```text
-.codex/agents/explorer.toml
+~/.codex/agents/explorer.toml
 ```
 
 Add:
@@ -233,7 +236,7 @@ The Explorer is doing relatively lightweight investigation, so we use a fast mod
 Create:
 
 ```text
-.codex/agents/builder.toml
+~/.codex/agents/builder.toml
 ```
 
 Add:
@@ -266,7 +269,7 @@ The Builder needs stronger coding ability but will generally be doing well-defin
 Create:
 
 ```text
-.codex/agents/reviewer.toml
+~/.codex/agents/reviewer.toml
 ```
 
 Add:
@@ -299,7 +302,7 @@ The Reviewer gets the strongest model and higher reasoning because its job is to
 Create:
 
 ```text
-.codex/agents/documenter.toml
+~/.codex/agents/documenter.toml
 ```
 
 Add:
@@ -397,16 +400,16 @@ The `.codex` files provide the **actual agent and model configuration**.
 If you want to change how the agents work, open:
 
 ```text
-Projects/.codex/config.toml
+~/.codex/config.toml
 ```
 
 If you want to change the model or behavior of one particular agent, edit its file:
 
 ```text
-.codex/agents/explorer.toml
-.codex/agents/builder.toml
-.codex/agents/reviewer.toml
-.codex/agents/documenter.toml
+~/.codex/agents/explorer.toml
+~/.codex/agents/builder.toml
+~/.codex/agents/reviewer.toml
+~/.codex/agents/documenter.toml
 ```
 
 For example, changing:
@@ -580,8 +583,7 @@ Update existing documentation rather than creating duplicates whenever possible.
 ## If you use Codex
 
 ```text
-Projects/
-├── AGENTS.md
+Your home folder/
 ├── .codex/
 │   ├── config.toml
 │   └── agents/
@@ -590,9 +592,11 @@ Projects/
 │       ├── reviewer.toml
 │       └── documenter.toml
 │
-├── TM_PE/
-├── TM_OD/
-└── Digital Twin/
+└── Projects/
+    ├── AGENTS.md
+    ├── TM_PE/
+    ├── TM_OD/
+    └── Digital Twin/
 ```
 
 ## If you use Claude Code

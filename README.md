@@ -64,7 +64,7 @@ Explains what was built and keeps the project documentation up to date.
 Our general workflow will be:
 
 ```text
-EXPLORE → BUILD → REVIEW → DOCUMENT
+EXPLORE → EXPLAIN FINDINGS → ASK PERMISSION → BUILD → REVIEW → DOCUMENT
 ```
 
 The setup is different depending on whether you are using **Codex** or **Claude Code**.
@@ -179,9 +179,11 @@ Inspect files, folders, dependencies, libraries, documentation, and existing cod
 
 Understand how the project currently works.
 
-Identify possible approaches and report what you discover.
+Identify possible approaches and report what you discover clearly.
 
-Do not make substantial changes unless explicitly asked.
+Explain the current state, the relevant files, the recommended approach, and any important risks or decisions.
+
+Do not build or make changes. Return your findings so the user can review them and approve the next step.
 """
 ```
 
@@ -205,6 +207,8 @@ model_reasoning_effort = "medium"
 
 model_instructions = """
 Implement the requested work.
+
+Only begin after the system has explained the exploration findings and the user has explicitly approved building.
 
 Create and edit files as necessary.
 
@@ -319,9 +323,21 @@ Use the Explorer when beginning a new task or whenever the project is not yet un
 
 The Explorer should investigate before substantial changes are made.
 
+After exploration, explain to the user:
+
+- what was found
+- how the project currently works
+- which files are relevant
+- the recommended implementation approach
+- any important risks, tradeoffs, or decisions
+
+Then ask the user for permission to start building.
+
+Do not start the Builder, edit files, or make implementation changes until the user explicitly approves.
+
 ## Builder
 
-Use the Builder once the task and existing project structure are understood.
+Use the Builder only after the exploration findings have been explained and the user has explicitly approved building.
 
 The Builder is responsible for implementing the solution.
 
@@ -337,12 +353,17 @@ Once the implementation has been reviewed, use the Documenter to update the proj
 
 # Workflow
 
-For substantial tasks, generally work in this order:
+For substantial tasks, work in this order:
 
 1. Explore
-2. Build
-3. Review
-4. Document
+2. Explain the findings and recommended approach to the user
+3. Ask the user for permission to start building
+4. Wait for explicit approval
+5. Build
+6. Review
+7. Document
+
+Exploration does not authorize implementation. Never skip the permission step between exploration and building.
 
 Do not ask one agent to perform all four roles when the work can reasonably be delegated.
 ```
@@ -438,10 +459,14 @@ Inspect files, folders, dependencies, documentation, and existing code.
 
 Understand how the project currently works.
 
-Identify possible approaches and report what you discover.
+Identify possible approaches and report what you discover clearly.
 
-Do not make substantial changes unless explicitly asked.
+Explain the current state, the relevant files, the recommended approach, and any important risks or decisions.
+
+Do not build or make changes. Return your findings so the user can review them and approve the next step.
 ```
+
+After the Explorer finishes, the main system must explain the findings to the user and ask for permission to start building. It must wait for explicit approval before using the Builder or changing files.
 
 ---
 
@@ -462,6 +487,8 @@ description: Builds and modifies the project.
 ---
 
 Implement the requested work.
+
+Only begin after the system has explained the exploration findings and the user has explicitly approved building.
 
 Create and edit files as necessary.
 
@@ -581,6 +608,12 @@ The goal is to begin thinking about computational work as a sequence of differen
 
 ```text
 EXPLORE
+   ↓
+EXPLAIN FINDINGS
+   ↓
+ASK PERMISSION
+   ↓
+WAIT FOR APPROVAL
    ↓
 BUILD
    ↓

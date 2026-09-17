@@ -131,6 +131,36 @@ Create:
 Projects/.codex/config.toml
 ```
 
+### How to find `config.toml`
+
+The `.codex` folder starts with a dot, which means your computer may treat it as a **hidden folder**. The file is inside the `Projects` folder you opened in VS Code—not inside one of the three course project folders.
+
+The easiest way to open it in VS Code is:
+
+1. Open the entire `Projects` folder in VS Code.
+2. Press **Command+P** on macOS or **Ctrl+P** on Windows/Linux.
+3. Type `.codex/config.toml`.
+4. Select the file from the results and press **Enter**.
+
+You can also find it in VS Code's Explorer by expanding `.codex` and selecting `config.toml`. VS Code normally displays folders whose names begin with a dot. If `.codex` is missing, make sure you opened the main `Projects` folder rather than `TM_PE`, `TM_OD`, or `Digital Twin`.
+
+To check from a terminal, first go to your `Projects` folder and list hidden files:
+
+```bash
+cd ~/Projects
+ls -la
+```
+
+You should see `.codex` in the output. Open the file in VS Code with:
+
+```bash
+code .codex/config.toml
+```
+
+If the `code` command is unavailable, use VS Code's **Command+P** method above. In macOS Finder, press **Command+Shift+.** to show hidden files. In Windows File Explorer, select **View → Show → Hidden items**.
+
+If you cannot find the file at all, it probably has not been created yet. Create a folder named `.codex` directly inside `Projects`, then create a file named `config.toml` inside that folder. Be careful that the file is not accidentally saved as `config.toml.txt`.
+
 Add:
 
 ```toml
